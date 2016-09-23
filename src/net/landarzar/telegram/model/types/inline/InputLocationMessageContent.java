@@ -21,14 +21,10 @@ public class InputLocationMessageContent extends InputMessageContent
 	 * net.landarzar.telegram.model.types.inline.InputMessageContent#build()
 	 */
 	@Override
-	public JsonObject build()
+	public void build(JsonObjectBuilder builder)
 	{
-		JsonObjectBuilder builder = Json.createObjectBuilder();
-
 		builder.add("latitude", latitude);
 		builder.add("longitude", longitude);
-		
-		return builder.build();
 	}
 
 

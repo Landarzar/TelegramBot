@@ -13,7 +13,7 @@ import javax.json.JsonValue;
  */
 public abstract class InlineQueryResult
 {
-	protected abstract JsonObject build();
+	public abstract JsonObject build();
 	
 	
 	/***

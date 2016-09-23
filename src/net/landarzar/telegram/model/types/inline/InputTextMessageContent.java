@@ -13,6 +13,21 @@ import javax.json.JsonObjectBuilder;
  */
 public class InputTextMessageContent extends InputMessageContent
 {
+	/**
+	 * 
+	 */
+	public InputTextMessageContent()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 
+	 */
+	public InputTextMessageContent(String text)
+	{
+		message_text = text;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -21,17 +36,14 @@ public class InputTextMessageContent extends InputMessageContent
 	 * net.landarzar.telegram.model.types.inline.InputMessageContent#build()
 	 */
 	@Override
-	public JsonObject build()
+	public void build(JsonObjectBuilder builder)
 	{
-		JsonObjectBuilder builder = Json.createObjectBuilder();
 
 		builder.add("message_text", message_text);
 		if (parse_mode != null)
 			builder.add("parse_mode", parse_mode);
 		if (disable_web_page_preview != null)
 			builder.add("disable_web_page_preview", disable_web_page_preview);
-		
-		return builder.build();
 	}
 
 	/***

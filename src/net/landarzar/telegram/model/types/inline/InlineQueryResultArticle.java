@@ -31,7 +31,8 @@ public class InlineQueryResultArticle extends InlineQueryResult
 		builder.add("type", type);
 		builder.add("id", id);
 		builder.add("title", title);
-		builder.add("input_message_content", input_message_content.build());
+		input_message_content.build(builder);
+//		builder.add("input_message_content", input_message_content.build());
 		if (reply_markup != null)
 			builder.add("reply_markup", reply_markup.build());
 		if (url != null)
@@ -46,7 +47,7 @@ public class InlineQueryResultArticle extends InlineQueryResult
 			builder.add("thumb_width", thumb_width);
 		if (thumb_height != null)
 			builder.add("thumb_height", thumb_height);
-		return null;
+		return builder.build();
 	}
 
 	/***

@@ -35,7 +35,7 @@ public abstract class TelegramBot
 	private void onUpdate(MethodResult mr, List<Update> list)
 	{
 		for (Update u : list) {
-			System.out.println(mr.getResult().toString());
+			log.log(Level.WARNING, "[Handler] Recieving Update: " + mr.getResult().toString());
 			if(u.update_id > offset)
 				offset = u.update_id ;
 			if (u.content.getContentType() == UpdateContent.ContentType.MESSAGE)
@@ -43,14 +43,12 @@ public abstract class TelegramBot
 			if (u.content.getContentType() == UpdateContent.ContentType.INLINE_QUERY)
 				onInlineQuery((InlineQuery) u.content, u);
 			else
-				log.log(Level.WARNING, "Unhandled Update (ID=" + u.update_id + ") with Type " + u.content.toString());
+				log.log(Level.WARNING, "[Handler] Unhandled Update (ID=" + u.update_id + ") with Type " + u.content.toString());
 		}
-
 	}
 
 	private void mainLoop()
 	{
-
 		try {
 			time = System.currentTimeMillis();
 			long ctime;
@@ -78,7 +76,6 @@ public abstract class TelegramBot
 		conn = new TelegramConnection(properties);
 
 		mainThread = new Thread(this::mainLoop);
-
 	}
 
 	protected void StartBot()

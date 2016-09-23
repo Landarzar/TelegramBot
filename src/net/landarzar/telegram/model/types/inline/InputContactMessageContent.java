@@ -21,16 +21,12 @@ public class InputContactMessageContent extends InputMessageContent
 	 * net.landarzar.telegram.model.types.inline.InputMessageContent#build()
 	 */
 	@Override
-	public JsonObject build()
+	public void build(JsonObjectBuilder builder)
 	{
-		JsonObjectBuilder builder = Json.createObjectBuilder();
-
 		builder.add("phone_number", phone_number);
 		builder.add("first_name", first_name);
 		if (last_name != null)
 			builder.add("last_name", last_name);
-		
-		return builder.build();
 	}
 	/***
 	 *  	Contact's phone number

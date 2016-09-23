@@ -18,7 +18,7 @@ public abstract class InputMessageContent
 	/**
 	 * @return
 	 */
-	public abstract JsonObject build();
+	public abstract void build(JsonObjectBuilder builder);
 //	{
 //		JsonObjectBuilder builder = Json.createObjectBuilder();
 //

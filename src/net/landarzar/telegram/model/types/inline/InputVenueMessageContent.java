@@ -21,18 +21,15 @@ public class InputVenueMessageContent extends InputMessageContent
 	 * net.landarzar.telegram.model.types.inline.InputMessageContent#build()
 	 */
 	@Override
-	public JsonObject build()
+	public void build(JsonObjectBuilder builder)
 	{
-		JsonObjectBuilder builder = Json.createObjectBuilder();
-
 		builder.add("latitude", latitude);
 		builder.add("longitude", longitude);
 		builder.add("title", title);
 		builder.add("address", address);
 		if (foursquare_id != null)
 			builder.add("foursquare_id", foursquare_id);
-		
-		return builder.build();
+
 	}
 
 	/***
