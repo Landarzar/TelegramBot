@@ -7,6 +7,9 @@ import javax.json.*;
 import javax.json.stream.JsonParser;
 
 import net.landarzar.telegram.model.types.Chat;
+import net.landarzar.telegram.model.types.ChosenInlineResult;
+import net.landarzar.telegram.model.types.InlineQuery;
+import net.landarzar.telegram.model.types.Location;
 import net.landarzar.telegram.model.types.Message;
 import net.landarzar.telegram.model.types.Update;
 import net.landarzar.telegram.model.types.UpdateContent;
@@ -42,25 +45,55 @@ public class ModelBuilder
 	 */
 	public static UpdateContent buildCallbackQuery(JsonObject jsonObject)
 	{
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException(jsonObject.toString());
 	}
 
 	/**
 	 * @param jsonObject
 	 * @return
 	 */
-	public static UpdateContent buildChosenInlineResult(JsonObject jsonObject)
+	public static ChosenInlineResult buildChosenInlineResult(JsonObject jsonObject)
 	{
-		throw new UnsupportedOperationException();
+		ChosenInlineResult cir = new ChosenInlineResult();
+
+		cir.result_id = jsonObject.getString("result_id");
+		cir.from = buildUser(jsonObject.getJsonObject("from"));
+		cir.query = jsonObject.getString("query");
+
+		if (jsonObject.containsKey("location"))
+			cir.location = buildLocation(jsonObject.getJsonObject("location"));
+		if (jsonObject.containsKey("inline_message_id"))
+			cir.inline_message_id = (jsonObject.getString("inline_message_id"));
+
+		return cir;
 	}
 
 	/**
 	 * @param jsonObject
 	 * @return
 	 */
-	public static UpdateContent buildInlineQuery(JsonObject jsonObject)
+	private static Location buildLocation(JsonObject jsonObject)
 	{
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException(jsonObject.toString());
+	}
+
+	/**
+	 * @param jsonObject
+	 * @return
+	 */
+	public static InlineQuery buildInlineQuery(JsonObject jsonObject)
+	{
+		InlineQuery ir = new InlineQuery();
+
+		ir.id = jsonObject.getString("id");
+		ir.from = buildUser(jsonObject.getJsonObject("from"));
+		ir.query = jsonObject.getString("query");
+		ir.offset = (jsonObject.getString("offset"));
+
+		if (jsonObject.containsKey("location"))
+			ir.location = buildLocation(jsonObject.getJsonObject("location"));
+
+		return ir;
 	}
 
 	public static Message buildMessage(JsonObject msg, boolean isEdited)

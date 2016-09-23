@@ -40,6 +40,8 @@ public abstract class TelegramBot
 				offset = u.update_id ;
 			if (u.content.getType() == UpdateContent.Type.MESSAGE)
 				onMessage((Message) u.content, u);
+			if (u.content.getType() == UpdateContent.Type.INLINE_QUERY)
+				onInlineQuery((InlineQuery) u.content, u);
 			else
 				log.log(Level.WARNING, "Unhandled Update (ID=" + u.update_id + ") with Type " + u.content.toString());
 		}
