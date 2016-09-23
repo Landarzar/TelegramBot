@@ -3,6 +3,8 @@
  */
 package net.landarzar.telegram.model.types;
 
+import javax.json.JsonObject;
+
 /**
  * @author Kai Sauerwald
  *
@@ -20,12 +22,28 @@ public class Message implements UpdateContent
 	public Message(boolean isEdited)
 	{
 		if (isEdited)
-			type = Type.EDIT_MESSAGE;
+			type = ContentType.EDIT_MESSAGE;
 		else
-			type = Type.MESSAGE;
+			type = ContentType.MESSAGE;
+	}
+	
+	public static Message build(JsonObject msg, boolean isEdited)
+	{
+		Message m = new Message(isEdited);
+
+		m.message_id = msg.getInt("message_id");
+		m.date = msg.getInt("date");
+		if (msg.containsKey("from"))
+			m.from = User.build(msg.getJsonObject("from"));
+		if (msg.containsKey("chat"))
+			m.chat = Chat.build(msg.getJsonObject("chat"));
+		if (msg.containsKey("text"))
+			m.text = (msg.getString("text"));
+
+		return m;
 	}
 
-	public Type type;
+	public ContentType type;
 
 	/***
 	 * Unique message identifier
@@ -61,7 +79,7 @@ public class Message implements UpdateContent
 	 * @see net.landarzar.telegram.model.types.UpdateContent#getType()
 	 */
 	@Override
-	public Type getType()
+	public ContentType getContentType()
 	{
 		return type;
 	}

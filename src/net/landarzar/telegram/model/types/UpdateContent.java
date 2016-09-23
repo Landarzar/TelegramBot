@@ -14,7 +14,7 @@ public interface UpdateContent
 	 * @author Kai Sauerwald
 	 * The type of the one of the optional parameters can be present in any given update.
 	 */
-	public enum Type {
+	public enum ContentType {
 		/***
 		 * New incoming message of any kind — text, photo, sticker, etc.
 		 */
@@ -42,5 +42,5 @@ public interface UpdateContent
 	 * @author Kai Sauerwald
 	 * The type of the one of the optional parameters can be present in any given update.
 	 */
-	public Type getType(); 
+	public ContentType getContentType(); 
 }

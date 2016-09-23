@@ -3,12 +3,33 @@
  */
 package net.landarzar.telegram.model.types;
 
+import javax.json.JsonObject;
+
 /**
  * @author Kai Sauerwald
  *
  */
 public class Chat
 {
+	public static Chat build(JsonObject chat)
+	{
+		Chat c = new Chat();
+
+		// ID can be LONG!
+		c.id = Long.parseLong(chat.get("id").toString());
+		c.type = chat.getString("type");
+		if (chat.containsKey("title"))
+			c.title = chat.getString("title");
+		if (chat.containsKey("username"))
+			c.username = chat.getString("username");
+		if (chat.containsKey("first_name"))
+			c.first_name = chat.getString("first_name");
+		if (chat.containsKey("last_name"))
+			c.last_name = chat.getString("last_name");
+
+		return c;
+	}
+	
 	/***
 	 * Unique identifier for this chat. This number may be greater than 32 bits
 	 * and some programming languages may have difficulty/silent defects in

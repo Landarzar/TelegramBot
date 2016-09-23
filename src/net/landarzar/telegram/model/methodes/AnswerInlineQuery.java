@@ -21,12 +21,12 @@ import net.landarzar.telegram.net.ModelBuilder;
  * @author Kai Sauerwald
  *
  */
-public class answerInlineQuery extends MethodWithCallback<Boolean>
+public class AnswerInlineQuery extends MethodWithCallback<Boolean>
 {
 	/**
 	 * 
 	 */
-	public answerInlineQuery(BiConsumer<MethodResult, Boolean> cb)
+	public AnswerInlineQuery(BiConsumer<MethodResult, Boolean> cb)
 	{
 		super(cb);
 	}
@@ -38,7 +38,7 @@ public class answerInlineQuery extends MethodWithCallback<Boolean>
 	 *            der Offset für das Update
 	 * @param cb
 	 */
-	public answerInlineQuery(String inline_query_id, BiConsumer<MethodResult, Boolean> cb)
+	public AnswerInlineQuery(String inline_query_id, BiConsumer<MethodResult, Boolean> cb)
 	{
 		super(cb);
 	}
@@ -54,20 +54,20 @@ public class answerInlineQuery extends MethodWithCallback<Boolean>
 	public LinkedList<InlineQueryResult> results;
 
 	/***
-	 * The maximum amount of time in seconds that the result of the inline query
+	 * Optional. The maximum amount of time in seconds that the result of the inline query
 	 * may be cached on the server. Defaults to 300.
 	 */
 	public Integer cache_time = null;
 
 	/***
-	 * Pass True, if results may be cached on the server side only for the user
+	 * Optional. Pass True, if results may be cached on the server side only for the user
 	 * that sent the query. By default, results may be returned to any user who
 	 * sends the same query
 	 */
 	public Boolean is_personal = null;
 
 	/***
-	 * Pass the offset that a client should send in the next query with the same
+	 * Optional. Pass the offset that a client should send in the next query with the same
 	 * text to receive more results. Pass an empty string if there are no more
 	 * results or if you don‘t support pagination. Offset length can’t exceed 64
 	 * bytes.
@@ -75,14 +75,14 @@ public class answerInlineQuery extends MethodWithCallback<Boolean>
 	public String next_offset = null;
 
 	/***
-	 * If passed, clients will display a button with specified text that
+	 * Optional. If passed, clients will display a button with specified text that
 	 * switches the user to a private chat with the bot and sends the bot a
 	 * start message with the parameter switch_pm_parameter
 	 */
 	public String switch_pm_text = null;
 
 	/***
-	 * Parameter for the start message sent to the bot when user presses the
+	 * Optional. Parameter for the start message sent to the bot when user presses the
 	 * switch button
 	 * 
 	 * Example: An inline bot that sends YouTube videos can ask the user to
@@ -120,8 +120,19 @@ public class answerInlineQuery extends MethodWithCallback<Boolean>
 		JsonObjectBuilder ob = Json.createObjectBuilder();
 		
 		ob.add("inline_query_id", inline_query_id);
-
-		ob.add("results", Json.createArrayBuilder().build());
+		
+		ob.add("results", Json.createArrayBuilder().add(Json.createObjectBuilder()
+				.add("type", "gif")
+				.add("id", "124")
+				.add("gif_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif")
+//				.add("thumb_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif")
+				).add(Json.createObjectBuilder()
+				.add("type", "gif")
+				.add("id", "124")
+				.add("gif_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif")
+				).build());
+		
+//		ob.add("results", Json.createArrayBuilder().build());
 
 		if (cache_time != null)
 			ob.add("cache_time", cache_time);

@@ -52,6 +52,7 @@ public class TelegramConnection
 		String msg = m.buildMethod();
 		if (msg != null && !msg.isEmpty()) {
 			log.log(Level.FINER, "Sending Parameter for Method <" + m.getPath() + ">: " + msg);
+			System.out.println("Sending Parameter for Method <" + m.getPath() + ">: " + msg);
 			OutputStream os = con.getOutputStream();
 			OutputStreamWriter osr = new OutputStreamWriter(os);
 			BufferedWriter out = new BufferedWriter(osr);
@@ -72,11 +73,10 @@ public class TelegramConnection
 			ins.close();
 		}
 	}
-	
+
 	public void performMethode(Method m) throws IOException
 	{
-		if (m == null)
-		{
+		if (m == null) {
 			log.log(Level.WARNING, "TelegrammConnection revieves empty Method (null)");
 			return;
 		}
@@ -96,7 +96,7 @@ public class TelegramConnection
 	public boolean pump() throws IOException
 	{
 		Method m = queue.poll();
-		if(m == null)
+		if (m == null)
 			return false;
 		performMethode(m);
 		return true;
