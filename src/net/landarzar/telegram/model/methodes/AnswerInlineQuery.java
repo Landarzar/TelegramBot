@@ -126,8 +126,9 @@ public class AnswerInlineQuery extends MethodWithCallback<Boolean>
 		for (InlineQueryResult iqr : results) {
 			builder.add(iqr.build());
 		}
-		ob.add("results", builder.add(Json.createObjectBuilder().add("type", "gif").add("id", "124").add("gif_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif").add("thumb_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif"))
-				.build());
+		
+//		builder.add(Json.createObjectBuilder().add("type", "gif").add("id", "124").add("gif_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif").add("thumb_url", "https://media.giphy.com/media/vLtxIwE5B8iyc/giphy.gif"));
+		ob.add("results", builder.build());
 
 		// ob.add("results", Json.createArrayBuilder().build());
 
