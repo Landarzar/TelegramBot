@@ -27,6 +27,12 @@ public class Message implements UpdateContent
 			type = ContentType.MESSAGE;
 	}
 	
+	/***
+	 * 
+	 * @param msg
+	 * @param isEdited False für normale Msg
+	 * @return
+	 */
 	public static Message build(JsonObject msg, boolean isEdited)
 	{
 		Message m = new Message(isEdited);

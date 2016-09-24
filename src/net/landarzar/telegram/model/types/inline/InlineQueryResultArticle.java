@@ -6,7 +6,6 @@ package net.landarzar.telegram.model.types.inline;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonValue;
 
 import net.landarzar.telegram.model.types.InlineKeyboardMarkup;
 
@@ -33,8 +32,9 @@ public class InlineQueryResultArticle extends InlineQueryResult
 		builder.add("title", title);
 		input_message_content.build(builder);
 //		builder.add("input_message_content", input_message_content.build());
-		if (reply_markup != null)
+		if (reply_markup != null){
 			builder.add("reply_markup", reply_markup.build());
+		}
 		if (url != null)
 			builder.add("url", url);
 		if (hide_url != null)
