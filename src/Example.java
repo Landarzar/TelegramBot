@@ -26,7 +26,7 @@ import net.landarzar.telegram.model.types.inline.InputTextMessageContent;
  */
 
 /**
- * @author kai
+ * @author Kai Sauerwald
  *
  */
 public class Example extends TelegramBot
@@ -42,6 +42,7 @@ public class Example extends TelegramBot
 		handler.setLevel(Level.ALL);
 		log.addHandler(handler);
 
+		//Please Note: This keys are invalid and have to be changed
 		TelegramBotProperties tprop = new TelegramBotProperties(275871224, "AAGgkiiX0ddEQMH_RhNR5biZUoXpv8ciEjA");
 
 		// Loading Properties;

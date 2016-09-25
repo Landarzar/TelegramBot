@@ -3,16 +3,20 @@
  */
 package net.landarzar.telegram;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.Properties;
-
 /**
  * @author Kai Sauerwald
  *
  */
 public class TelegramBotProperties
 {
+
+	/**
+	 * 
+	 */
+	public TelegramBotProperties()
+	{
+	}
+	
 	/**
 	 * 
 	 */
@@ -22,7 +26,10 @@ public class TelegramBotProperties
 		this.NET_BOT_TOKEN = bot_token;
 	}
 	
-	public boolean THREADED = true;
+	/***
+	 * Gibt an ob der Server in threaded modus betrieben werden soll
+	 */
+	public boolean SYSTEM_THREADED = true;
 
 	/***
 	 * The Time im MS for System Ticks

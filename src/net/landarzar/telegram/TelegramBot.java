@@ -28,6 +28,10 @@ public abstract class TelegramBot
 	private Thread mainThread;
 	private volatile long time = -1L;
 	private int offset = -1;
+	/***
+	 * Variable for the Thread
+	 */
+	private volatile boolean shouldRun = false;
 
 	protected TelegramBotProperties properties;
 	protected TelegramConnection conn;
@@ -52,7 +56,7 @@ public abstract class TelegramBot
 		try {
 			time = System.currentTimeMillis();
 			long ctime;
-			while (true) {
+			while (shouldRun) {
 				ctime = System.currentTimeMillis();
 				if (ctime - time > properties.NET_UPDATE_INTERVAL) {
 					time = ctime;
@@ -72,19 +76,32 @@ public abstract class TelegramBot
 
 	public TelegramBot(TelegramBotProperties prop)
 	{
+		//TODO: Add Checks for Thread
 		properties = prop;
 		conn = new TelegramConnection(properties);
 
-		mainThread = new Thread(this::mainLoop);
 	}
 
 	protected void StartBot()
 	{
-		if (properties.THREADED) {
+		shouldRun = true;
+		mainThread = new Thread(this::mainLoop);
+		if (properties.SYSTEM_THREADED) {
 			mainThread.start();
 		} else {
 			throw new UnsupportedOperationException("At the moment only the thread mode is implemented.");
 		}
+	}
+	
+	protected void StopBot()
+	{
+		//TODO: Add Checks for Thread
+		shouldRun=false;
+	}
+	
+	protected boolean isAlive()
+	{
+		return mainThread == null ? false : mainThread.isAlive();
 	}
 
 	/***
