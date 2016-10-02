@@ -3,7 +3,7 @@
  */
 package net.landarzar.telegram.model.methodes;
 
-import java.io.BufferedReader;
+import java.util.LinkedList;
 
 /**
  * @author Kai Sauerwald
